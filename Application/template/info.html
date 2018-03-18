@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.bootcss.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <title>绩点计算结果</title>
+</head>
+<body>
+<div class="container">
+    <h1>PassMe plus!</h1>
+
+    <p>综合平均绩点：{{ result.综合.平均绩点 }}</p>
+    {% for item in info %}
+    <table class="table table-bordered table-hover">
+        <caption>{{ item.学期 }}</caption>
+        <thead>
+        <tr>
+            <th width="14%">课程号</th>
+            <th width="14%">课序号</th>
+            <th width="14%">课程名</th>
+            <th width="14%">英文课程名</th>
+            <th width="14%">学分</th>
+            <th width="14%">课程属性</th>
+            <th width="14%">成绩</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for c in item.课程 %}
+        <tr>
+            <td width="14%">{{ c.课程号 }}</td>
+            <td width="14%">{{ c.课序号 }}</td>
+            <td width="14%">{{ c.课程名 }}</td>
+            <td width="14%">{{ c.英文名 }}</td>
+            <td width="14%">{{ c.学分 }}</td>
+            <td width="14%">{{ c.课程属性 }}</td>
+            <td width="14%">{{ c.成绩 }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <p>该学期平均绩点:{{ item.结果.平均绩点 }}</p>
+    {% endfor %}
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
