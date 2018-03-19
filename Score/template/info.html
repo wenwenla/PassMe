@@ -10,7 +10,7 @@
 <div class="container">
     <h1>PassMe plus!</h1>
 
-    <p>综合平均绩点：{{ result.综合.平均绩点 }}</p>
+    <p>综合平均绩点：<span style="color: red;">{{ result.综合.平均绩点 }}</span></p>
     {% for item in info %}
     <table class="table table-bordered table-hover">
         <caption>{{ item.学期 }}</caption>
@@ -39,7 +39,7 @@
         {% endfor %}
         </tbody>
     </table>
-    <p>该学期平均绩点:{{ item.结果.平均绩点 }}</p>
+        <p>该学期平均绩点: <span style="color: red">{{ item.结果.平均绩点 }}</span></p>
     {% endfor %}
 </div>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>

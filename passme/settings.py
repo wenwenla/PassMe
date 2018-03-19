@@ -26,8 +26,9 @@ SECRET_KEY = 'n3@a8eb7+y_=c_)00-)%@oic6vxbl$+849z)ir3qpgx#hh5ul0'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost',
-    '115.159.188.200'
+    '127.0.0.1',
+    '115.159.188.200',
+    'toys.lovelywen.com',
 ]
 
 # Application definition
@@ -39,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Application',
+    'Score',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +60,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, 'Application/template'),
+            os.path.join(BASE_DIR, 'Score/template'),
         ]
         ,
         'APP_DIRS': True,

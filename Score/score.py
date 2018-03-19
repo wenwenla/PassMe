@@ -21,7 +21,7 @@ class Score(object):
         name = str(random.random())[2:] + '.jpg'
         real_dir = settings.STATIC_ROOT
         if img.status_code == 200:
-            open(real_dir + '/Application/' + name, 'wb').write(img.content)
+            open(real_dir + '/Score/' + name, 'wb').write(img.content)
         return name
 
     def login(self, zjh, mm, v_yzm):
