@@ -1,6 +1,6 @@
 .idea/
 
-static_root/Score/*.png
+static_root/Score/*.jpg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
