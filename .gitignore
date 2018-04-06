@@ -1,4 +1,5 @@
 .idea/
+py3env/
 
 static_root/Score/*.jpg
 
