@@ -1,7 +1,7 @@
 .idea/
 py3env/
 
-static_root/Score/*.jpg
+static_root/score
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
