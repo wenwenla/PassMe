@@ -1,3 +1,4 @@
+import os
 import requests
 import bs4
 import random
@@ -21,7 +22,9 @@ class Score(object):
         name = str(random.random())[2:] + '.jpg'
         real_dir = settings.STATIC_ROOT
         if img.status_code == 200:
-            open(real_dir + '/Score/' + name, 'wb').write(img.content)
+            if not os.path.exists(real_dir + '/score/'):
+                os.mkdir(real_dir + '/score/')
+            open(real_dir + '/score/' + name, 'wb').write(img.content)
         return name
 
     def login(self, zjh, mm, v_yzm):
