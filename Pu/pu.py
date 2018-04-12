@@ -267,7 +267,7 @@ class DataAnalysis(object):
 if __name__ == '__main__':
     test = Pu()
 
-    result = test.login('1504090213@hhu.com', 'ww321283')
+    result = test.login('账号@hhu.com', '密码')
     print(result)
     print(test.info)
     if result:
