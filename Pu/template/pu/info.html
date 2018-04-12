@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.bootcss.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <title>PU学时统计结果</title>
+</head>
+<body>
+<div class="container">
+    <h1>PassMe plus!</h1>
+    <table class="table table-bordered table-hover">
+        <caption>志愿服务类</caption>
+        <thead>
+        <tr>
+            <th width="33%">类别名</th>
+            <th width="33%">名称</th>
+            <th width="33%">学时</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for c in item.zhi_yuan.detail %}
+        <tr>
+            <td width="33%">{{ c.category }}</td>
+            <td width="33%">{{ c.title }}</td>
+            <td width="33%">{{ c.credits }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        <p>总志愿学时: <span style="color: red">{{ item.zhi_yuan.total }}</span></p>
+
+    <table class="table table-bordered table-hover">
+        <caption>活动参与类</caption>
+        <thead>
+        <tr>
+            <th width="33%">类别名</th>
+            <th width="33%">名称</th>
+            <th width="33%">学时</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for c in item.huo_dong.detail %}
+        <tr>
+            <td width="33%">{{ c.category }}</td>
+            <td width="33%">{{ c.title }}</td>
+            <td width="33%">{{ c.credits }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        <p>总活动学时: <span style="color: red">{{ item.huo_dong.total }}</span></p>
+
+    <table class="table table-bordered table-hover">
+        <caption>寒暑假社会实践类</caption>
+        <thead>
+        <tr>
+            <th width="33%">类别名</th>
+            <th width="33%">名称</th>
+            <th width="33%">学时</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for c in item.jia_qi.detail %}
+        <tr>
+            <td width="33%">{{ c.category }}</td>
+            <td width="33%">{{ c.title }}</td>
+            <td width="33%">{{ c.credits }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        <p>总社会实践学时: <span style="color: red">{{ item.jia_qi.total }}</span></p>
+
+    <table class="table table-bordered table-hover">
+        <caption>竞赛成果类</caption>
+        <thead>
+        <tr>
+            <th width="33%">类别名</th>
+            <th width="33%">名称</th>
+            <th width="33%">学时</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for c in item.jin_sai.detail %}
+        <tr>
+            <td width="33%">{{ c.category }}</td>
+            <td width="33%">{{ c.title }}</td>
+            <td width="33%">{{ c.credits }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        <p>总竞赛成果学时: <span style="color: red">{{ item.jin_sai.total }}</span></p>
+
+    <table class="table table-bordered table-hover">
+        <caption>社会工作、荣誉与技能培训类</caption>
+        <thead>
+        <tr>
+            <th width="33%">类别名</th>
+            <th width="33%">名称</th>
+            <th width="33%">学时</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for c in item.qi_ta.detail %}
+        <tr>
+            <td width="33%">{{ c.category }}</td>
+            <td width="33%">{{ c.title }}</td>
+            <td width="33%">{{ c.credits }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        <p>总社会工作、荣誉与技能培训学时: <span style="color: red">{{ item.qi_ta.total }}</span></p>
+
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

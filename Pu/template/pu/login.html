@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.bootcss.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <title>登录</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-5"><h1>系统登录</h1></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-4 col-sm-4 alert alert-danger">
+            <p>该系统用于HHU_PU查分类学时使用。</p>
+            <p>请勿发起大流量攻击，查询速度比较慢，请勿重复查询。</p>
+            <p>本系统不保存任何学号密码之类的个人信息，源码位于github，请放心使用。</p>
+        </div>
+    </div>
+    <form class="form-horizontal" role="form" action="do_login/" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="zh" class="col-sm-offset-1 col-sm-2 control-label">账号</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="zh" name="zh">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="mm" class="col-sm-offset-1 col-sm-2 control-label">密码</label>
+            <div class="col-sm-6">
+                <input type="password" class="form-control" id="mm" name="mm">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-10">
+                <button type="submit" class="btn btn-default">Go!</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

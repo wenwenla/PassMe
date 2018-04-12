@@ -9,7 +9,7 @@ def login_page(request):
     request.session['JSESSIONID'] = session_id
     score = Score(session_id)
     img_url = score.get_image()
-    return render(request, 'login.html', {'img_url': img_url})
+    return render(request, 'score/login.html', {'img_url': img_url})
 
 
 def do_login(request):
@@ -24,7 +24,7 @@ def do_login(request):
     score = Score(session_id)
     if not score.login(name, password, v_yzm):
         return HttpResponseRedirect('/score/')
-    return HttpResponseRedirect('/info/')
+    return HttpResponseRedirect('/score/info/')
 
 
 def show_info(request):
@@ -34,4 +34,4 @@ def show_info(request):
     score = Score(session_id)
     info = score.phrase_page(score.get_score_page())
     result = score.get_result(info)
-    return render(request, 'info.html', {'result': result, 'info': info})
+    return render(request, 'score/info.html', {'result': result, 'info': info})

@@ -18,10 +18,14 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 import Score.views as av
+import Pu.views as pv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('score/', av.login_page),
-    path('do_login/', av.do_login),
-    path('info/', av.show_info),
+    path('score/do_login/', av.do_login),
+    path('score/info/', av.show_info),
+    path('pu/', pv.login_page),
+    path('pu/do_login/', pv.do_login),
+    path('pu/info/', pv.info),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
