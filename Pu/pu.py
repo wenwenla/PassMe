@@ -196,6 +196,7 @@ class DataAnalysis(object):
         self.result = {}
 
     def run(self):
+        real_total = 0.0
         total = 0.0
         self.result['zhi_yuan'] = {}
         self.result['zhi_yuan']['detail'] = []
@@ -208,6 +209,7 @@ class DataAnalysis(object):
                     'title': item['title'],
                 })
         self.result['zhi_yuan']['total'] = total
+        real_total += total
 
         total = 0.0
         self.result['huo_dong'] = {}
@@ -222,6 +224,7 @@ class DataAnalysis(object):
                     'title': item['title'],
                 })
         self.result['huo_dong']['total'] = total
+        real_total += total
 
         total = 0.0
         self.result['jia_qi'] = {}
@@ -235,6 +238,7 @@ class DataAnalysis(object):
                     'title': item['title'],
                 })
         self.result['jia_qi']['total'] = total
+        real_total += total
 
         total = 0.0
         self.result['jin_sai'] = {}
@@ -248,6 +252,7 @@ class DataAnalysis(object):
                     'title': item['title'],
                 })
         self.result['jin_sai']['total'] = total
+        real_total += total
 
         total = 0.0
         self.result['qi_ta'] = {}
@@ -261,6 +266,8 @@ class DataAnalysis(object):
                     'title': item['title'],
                 })
         self.result['qi_ta']['total'] = total
+        real_total += total
+        self.result['total'] = real_total
         return self.result
 
 

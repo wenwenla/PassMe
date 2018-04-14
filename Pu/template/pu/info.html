@@ -9,6 +9,7 @@
 <body>
 <div class="container">
     <h1>PassMe plus!</h1>
+    <p>总学时: <span style="color: red">{{ item.total }}</span></p>
     <table class="table table-bordered table-hover">
         <caption>志愿服务类</caption>
         <thead>
@@ -28,8 +29,7 @@
         {% endfor %}
         </tbody>
     </table>
-        <p>总志愿学时: <span style="color: red">{{ item.zhi_yuan.total }}</span></p>
-
+    <p>总志愿学时: <span style="color: red">{{ item.zhi_yuan.total }}</span></p>
     <table class="table table-bordered table-hover">
         <caption>活动参与类</caption>
         <thead>
