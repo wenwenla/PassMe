@@ -1,5 +1,6 @@
 .idea/
 py3env/
+static_local/
 
 static_root/score
 

@@ -27,7 +27,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    '115.159.188.200',
     '47.98.201.44',
 ]
 
@@ -42,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Score',
     'Pu',
+    'Ticks',
 ]
 
 MIDDLEWARE = [
@@ -60,9 +60,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'Score/template'),
             os.path.join(BASE_DIR, 'Pu/template'),
+            os.path.join(BASE_DIR, 'Ticks/template'),
         ]
         ,
         'APP_DIRS': True,
@@ -133,3 +133,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static_local')
+]
