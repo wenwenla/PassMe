@@ -28,7 +28,7 @@ def index(request):
             'content': i.content,
             'self': i.user == user,
         })
-    return render(request, 'ticks/time_line.html', {'data': data})
+    return render(request, 'ticks/time_line.html', {'data': data, 'username': user.user.username})
 
 
 def login(request):
