@@ -28,7 +28,8 @@ def index(request):
             'content': i.content,
             'self': i.user == user,
         })
-    return render(request, 'ticks/time_line.html', {'data': data, 'username': user.user.username})
+    return render(request, 'ticks/time_line.html', {'data': data, 'username': user.user.username,
+                                                    'usercode': user.user_code})
 
 
 def login(request):
@@ -112,3 +113,48 @@ def other(request):
         ret['message'] = '你想黑了我的服务器啊！'
 
     return JsonResponse(ret)
+
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            email = form.cleaned_data['email']
+            partner = form.cleaned_data['partner']
+            introduce = form.cleaned_data['introduce']
+            code = form.cleaned_data['code']
+
+            if not Code.objects.filter(secret=code).exists():
+                return render(request, 'ticks/register.html', {'form': form, 'error': True,
+                                                               'message': '邀请码错误，请联系wenwenla！'})
+            if User.objects.filter(username=name).exists():
+                return render(request, 'ticks/register.html', {'form': form, 'error': True,
+                                                               'message': '和别人重名啦！'})
+            p = Profile.objects.filter(user_code=partner)
+
+            user = User.objects.create_user(username=name, password=password, email=email)
+            user.profile.introduce = introduce
+            if p.exists():
+                if p[0].partner:
+                    return render(request, 'ticks/register.html', {'form': form, 'error': True,
+                                                                   'message': '看上去你输入的账号已经有对象了！'})
+                else:
+                    partner = p[0].user
+                    partner.profile.partner = user.profile
+                    partner.save()
+                    user.profile.partner = p[0]
+            while True:
+                num = '%09d' % (random.randint(0, 999999999))
+                if not Profile.objects.filter(user_code=num).exists():
+                    break
+            user.profile.user_code = num
+            user.save()
+            return HttpResponseRedirect('/ticks/login/')
+        else:
+            return render(request, 'ticks/register.html', {'form': form, 'error': True,
+                                                           'message': '填写内容有明显错误，注意密码不要太简单，输入正确邮箱！'})
+    else:
+        form = RegisterForm()
+        return render(request, 'ticks/register.html', {'form': form})

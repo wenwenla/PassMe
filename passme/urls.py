@@ -35,4 +35,5 @@ urlpatterns = [
     path('ticks/wakeup/', tv.wakeup),
     path('ticks/sleep/', tv.sleep),
     path('ticks/other/', tv.other),
+    path('ticks/register/', tv.register),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
