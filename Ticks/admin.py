@@ -6,3 +6,4 @@ import Ticks.models as tm
 admin.site.register(tm.Profile)
 admin.site.register(tm.Event)
 admin.site.register(tm.Code)
+admin.site.register(tm.Item)

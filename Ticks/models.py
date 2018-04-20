@@ -47,3 +47,14 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Item(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    finished = models.BooleanField()
+    create_time = models.DateTimeField()
+    finished_time = models.DateTimeField(null=True)
+    content = models.CharField(max_length=256)
+
+    def __str__(self):
+        return self.content

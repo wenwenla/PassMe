@@ -5,7 +5,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse
-
+from django.utils import timezone
 from Ticks.forms import *
 from Ticks.models import *
 # Create your views here.
@@ -187,3 +187,71 @@ def register(request):
     else:
         form = RegisterForm()
         return render(request, 'ticks/register.html', {'form': form})
+
+
+@login_required(login_url='/ticks/login/')
+def todo(request):
+    user = request.user.profile
+    partner = user.partner
+
+    my_item = Item.objects.filter(user=user, finished=False).order_by('-create_time')[:20]
+    my_finished = Item.objects.filter(user=user, finished=True).order_by('-create_time')[:20]
+
+    your_item = Item.objects.filter(user=partner, finished=False).order_by('-create_time')[:20]
+    your_finished = Item.objects.filter(user=partner, finished=True).order_by('-create_time')[:20]
+
+    return render(request, 'ticks/todo.html', {'my_item': my_item, 'my_finished': my_finished,
+                                               'your_item': your_item, 'your_finished': your_finished,
+                                               'username': user.user.username, 'usercode': user.user_code})
+
+
+@login_required(login_url='/ticks/login/')
+def add_item(request):
+    ret = {
+        'status': 'ok',
+        'message': 'ok'
+    }
+    user = request.user.profile
+    now = timezone.now()
+
+    content = request.POST.get('content')
+    if not content:
+        ret['status'] = 'error'
+        ret['message'] = '请输入内容！'
+        return JsonResponse(ret)
+
+    Item.objects.create(user=user, finished=False, create_time=now, content=content)
+    return JsonResponse(ret)
+
+
+@login_required(login_url='ticks/login/')
+def done(request):
+    ret = {
+        'status': 'ok',
+        'message': 'ok'
+    }
+
+    user = request.user.profile
+    item_id = request.POST.get('item_id')
+
+    if not item_id:
+        ret['status'] = 'error'
+        ret['message'] = '你想黑掉我的服务器么？'
+        return JsonResponse(ret)
+
+    try:
+        obj = Item.objects.get(id=int(item_id))
+    except:
+        ret['status'] = 'error'
+        ret['message'] = '你想黑掉我的服务器么？'
+        return JsonResponse(ret)
+
+    if obj.user != user:
+        ret['status'] = 'error'
+        ret['message'] = '你无权修改他人内容。'
+        return JsonResponse(ret)
+
+    obj.finished = True
+    obj.finished_time = timezone.now()
+    obj.save()
+    return JsonResponse(ret)
