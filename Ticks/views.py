@@ -1,10 +1,10 @@
 import random
 
+import datetime
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse
-from django.utils import timezone
 
 from Ticks.forms import *
 from Ticks.models import *
@@ -59,11 +59,19 @@ def wakeup(request):
     ret = {'status': 'ok', 'message': 'success'}
     user = request.user.profile
 
-    now = timezone.now()
-    if Event.objects.filter(class_type='W', date=now.date(), user=user).exists():
-        ret['status'] = 'error'
-        ret['message'] = '不要重复起床打卡啊，乖~'
-        return JsonResponse(ret)
+    now = datetime.datetime.now()
+
+    try:
+        pre = Event.objects.filter(user=user, class_type='W').order_by('-date', '-time')[0]
+        pre_time = datetime.datetime(pre.date.year, pre.date.month, pre.date.day,
+                                     pre.time.hour, pre.time.minute, pre.time.second)
+        if (now - pre_time).seconds < 8 * 60 * 60:
+            ret['status'] = 'error'
+            ret['message'] = '据上次起床打卡才过去%.2f分钟。。。' % ((now - pre_time).seconds / 60)
+            return JsonResponse(ret)
+    except:
+        pass
+
     try:
         Event.objects.create(user=user, class_type='W', title=random.choice(choice), content=request.POST['content'])
     except:
@@ -79,11 +87,19 @@ def sleep(request):
     ret = {'status': 'ok', 'message': 'success'}
     user = request.user.profile
 
-    now = timezone.now()
-    if Event.objects.filter(class_type='S', date=now.date(), user=user).exists():
-        ret['status'] = 'error'
-        ret['message'] = '一天睡两次是想干啥啊~'
-        return JsonResponse(ret)
+    now = datetime.datetime.now()
+
+    try:
+        pre = Event.objects.filter(user=user, class_type='S').order_by('-date', '-time')[0]
+        pre_time = datetime.datetime(pre.date.year, pre.date.month, pre.date.day,
+                                     pre.time.hour, pre.time.minute, pre.time.second)
+        if (now - pre_time).seconds < 8 * 60 * 60:
+            ret['status'] = 'error'
+            ret['message'] = '据上次睡觉打卡才过去%.2f分钟。。。' % ((now - pre_time).seconds / 60)
+            return JsonResponse(ret)
+    except:
+        pass
+
     try:
         Event.objects.create(user=user, class_type='S', title=random.choice(choice), content=request.POST['content'])
     except:
@@ -105,6 +121,19 @@ def other(request):
         content = content.split(':')[1]
     else:
         title = '随手记录'
+
+    now = datetime.datetime.now()
+
+    try:
+        pre = Event.objects.filter(user=user, class_type='O').order_by('-date', '-time')[0]
+        pre_time = datetime.datetime(pre.date.year, pre.date.month, pre.date.day,
+                                     pre.time.hour, pre.time.minute, pre.time.second)
+        if (now - pre_time).seconds < 120:
+            ret['status'] = 'error'
+            ret['message'] = '你怎么这么多话，过会儿再写吧'
+            return JsonResponse(ret)
+    except:
+        pass
 
     try:
         Event.objects.create(user=user, class_type='O', title=title, content=content)
