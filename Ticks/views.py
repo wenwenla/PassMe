@@ -65,9 +65,11 @@ def wakeup(request):
         pre = Event.objects.filter(user=user, class_type='W').order_by('-date', '-time')[0]
         pre_time = datetime.datetime(pre.date.year, pre.date.month, pre.date.day,
                                      pre.time.hour, pre.time.minute, pre.time.second)
-        if (now - pre_time).seconds < 8 * 60 * 60:
+        diff = now - pre_time
+        dt = diff.seconds + diff.days * 86400
+        if dt < 8 * 60 * 60:
             ret['status'] = 'error'
-            ret['message'] = '据上次起床打卡才过去%.2f分钟。。。' % ((now - pre_time).seconds / 60)
+            ret['message'] = '据上次起床打卡才过去%.2f分钟。。。' % (dt / 60)
             return JsonResponse(ret)
     except:
         pass
@@ -93,9 +95,11 @@ def sleep(request):
         pre = Event.objects.filter(user=user, class_type='S').order_by('-date', '-time')[0]
         pre_time = datetime.datetime(pre.date.year, pre.date.month, pre.date.day,
                                      pre.time.hour, pre.time.minute, pre.time.second)
-        if (now - pre_time).seconds < 8 * 60 * 60:
+        diff = now - pre_time
+        dt = diff.seconds + diff.days * 86400
+        if dt < 8 * 60 * 60:
             ret['status'] = 'error'
-            ret['message'] = '据上次睡觉打卡才过去%.2f分钟。。。' % ((now - pre_time).seconds / 60)
+            ret['message'] = '据上次睡觉打卡才过去%.2f分钟。。。' % (dt / 60)
             return JsonResponse(ret)
     except:
         pass
@@ -128,7 +132,9 @@ def other(request):
         pre = Event.objects.filter(user=user, class_type='O').order_by('-date', '-time')[0]
         pre_time = datetime.datetime(pre.date.year, pre.date.month, pre.date.day,
                                      pre.time.hour, pre.time.minute, pre.time.second)
-        if (now - pre_time).seconds < 120:
+        diff = now - pre_time
+        dt = diff.seconds + diff.days * 86400
+        if dt < 120:
             ret['status'] = 'error'
             ret['message'] = '你怎么这么多话，过会儿再写吧'
             return JsonResponse(ret)
