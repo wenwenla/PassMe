@@ -200,8 +200,8 @@ def todo(request):
     user = request.user.profile
     partner = user.partner
 
-    my_item = Item.objects.filter(user=user, finished=False).order_by('-create_time')[:20]
-    my_finished = Item.objects.filter(user=user, finished=True).order_by('-create_time')[:20]
+    my_item = Item.objects.filter(user=user, finished=False).order_by('-create_time')[:50]
+    my_finished = Item.objects.filter(user=user, finished=True).order_by('-create_time')[:50]
 
     your_item = Item.objects.filter(user=partner, finished=False).order_by('-create_time')[:20]
     your_finished = Item.objects.filter(user=partner, finished=True).order_by('-create_time')[:20]

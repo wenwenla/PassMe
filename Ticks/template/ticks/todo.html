@@ -67,7 +67,9 @@
                             {% for item in my_item %}
                             <div class="checkbox checkbox-primary">
                                 <input id="{{ item.id }}" type="checkbox">
-                                <label for="{{ item.id }}">{{ item.content }}@{{ item.create_time }}</label>
+                                <label for="{{ item.id }}">{{ item.content }}
+                                    <span class="label label-warning">@{{ item.create_time | date:"Y-m-d" }}</span>
+                                </label>
                             </div>
                             {% endfor %}
                         </div> <!--todo container-->
@@ -90,7 +92,9 @@
                             {% for item in your_item %}
                             <div class="checkbox checkbox-primary">
                                 <input id="{{ item.id }}" type="checkbox">
-                                <label for="{{ item.id }}">{{ item.content }}@{{ item.create_time }}</label>
+                                <label for="{{ item.id }}">{{ item.content }}
+                                    <span class="label label-warning">@{{ item.create_time | date:"Y-m-d" }}</span>
+                                </label>
                             </div>
                             {% endfor %}
                         </div><!--todo container-->
@@ -109,7 +113,9 @@
                             {% for item in my_finished %}
                             <div class="checkbox checkbox-primary">
                                 <input id="{{ item.id }}" type="checkbox" disabled="disabled" checked="checked">
-                                <label for="{{ item.id }}">{{ item.content }}@{{ item.finished_time }}</label>
+                                <label for="{{ item.id }}">{{ item.content }}
+                                    <span class="label label-success">@{{ item.finished_time | date:"Y-m-d" }}</span>
+                                </label>
                             </div>
                             {% endfor %}
                         </div><!--my finished container-->
@@ -125,7 +131,9 @@
                             {% for item in your_finished %}
                             <div class="checkbox checkbox-primary">
                                 <input id="{{ item.id }}" type="checkbox" disabled="disabled" checked="checked">
-                                <label for="{{ item.id }}">{{ item.content }}@{{ item.finished_time }}</label>
+                                <label for="{{ item.id }}">{{ item.content }}
+                                    <span class="label label-success">@{{ item.finished_time | date:"Y-m-d" }}</span>
+                                </label>
                             </div>
                             {% endfor %}
                         </div><!--your finished container-->
