@@ -139,7 +139,7 @@ class Score(object):
             item['结果'] = {
                 '总学分': total,
                 '总绩点': pts,
-                '平均绩点': pts / total,
+                '平均绩点': pts / total if total != 0 else 0,
             }
         avg_page = self.get_avg_page()
         result['综合'] = Score.get_avg_score(avg_page)
