@@ -4,4 +4,9 @@
 
 现在加上了分类查询PU学时的功能
 
-现在多了一个日常咸鱼功能
+Deployment:
+
+uwsgi --ini=passme\_uwsgi.ini
+
+killall -9 uwsgi
+
