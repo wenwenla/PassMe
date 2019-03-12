@@ -19,7 +19,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 import Score.views as av
 import Pu.views as pv
-import Ticks.views as tv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,14 +28,4 @@ urlpatterns = [
     path('pu/', pv.login_page),
     path('pu/do_login/', pv.do_login),
     path('pu/info/', pv.info),
-    path('ticks/', tv.index),
-    path('ticks/login/', tv.login),
-    path('ticks/logout/', tv.logout),
-    path('ticks/wakeup/', tv.wakeup),
-    path('ticks/sleep/', tv.sleep),
-    path('ticks/other/', tv.other),
-    path('ticks/register/', tv.register),
-    path('ticks/todo/', tv.todo),
-    path('ticks/additem/', tv.add_item),
-    path('ticks/done/', tv.done),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
